@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'core/navigation/custom_navigator.dart';
+import 'core/navigation/routes.dart';
 
 void main() {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -13,6 +17,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return ScreenUtilInit(
       designSize: const Size(360, 690),
       minTextAdapt: true,
@@ -20,6 +28,11 @@ class MyApp extends StatelessWidget {
       builder: (_, child) {
         FlutterNativeSplash.remove();
         return MaterialApp(
+          initialRoute: Routes.BOARDING,
+          navigatorKey: CustomNavigator.navigatorState,
+          onGenerateRoute: CustomNavigator.onCreateRoute,
+          navigatorObservers: [CustomNavigator.routeObserver],
+          scaffoldMessengerKey: CustomNavigator.scaffoldState,
           debugShowCheckedModeBanner: false,
           title: 'First Method',
           home: child,
