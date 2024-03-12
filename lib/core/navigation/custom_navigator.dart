@@ -1,4 +1,6 @@
 import 'package:empower_health/core/navigation/routes.dart';
+import 'package:empower_health/features/authentication/onboarding/onboarding_screen.dart';
+import 'package:empower_health/features/home/home_view.dart';
 import 'package:flutter/material.dart';
 
 import '../../main.dart';
@@ -11,17 +13,24 @@ var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
 abstract class CustomNavigator {
   static final GlobalKey<NavigatorState> navigatorState =
       GlobalKey<NavigatorState>();
-  static final RouteObserver<PageRoute> routeObserver =
-      RouteObserver<PageRoute>();
-  static final GlobalKey<ScaffoldMessengerState> scaffoldState =
-      GlobalKey<ScaffoldMessengerState>();
 
   static Route<dynamic> onCreateRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.BOARDING:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-                Container(),
+                const OnboardingView(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return SlideTransition(
+                position: animation.drive(tween),
+                child: child,
+              );
+            });
+      case Routes.HOME:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const HomeView(),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
               return SlideTransition(

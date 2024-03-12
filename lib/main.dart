@@ -1,3 +1,4 @@
+import 'package:empower_health/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -31,10 +32,8 @@ class MyApp extends StatelessWidget {
           initialRoute: Routes.BOARDING,
           navigatorKey: CustomNavigator.navigatorState,
           onGenerateRoute: CustomNavigator.onCreateRoute,
-          navigatorObservers: [CustomNavigator.routeObserver],
-          scaffoldMessengerKey: CustomNavigator.scaffoldState,
           debugShowCheckedModeBanner: false,
-          title: 'First Method',
+          theme: ThemeData(scaffoldBackgroundColor: AppColors.background),
           home: child,
         );
       },
