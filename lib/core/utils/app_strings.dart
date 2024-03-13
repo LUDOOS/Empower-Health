@@ -4,6 +4,8 @@ class AppStrings {
   static const String onboardingBody =
       "our application is a comprehensive platform designed to empower users with esential healthcare services. It provides features such as medical test analysis, medication alternatives";
   static const String title = "Help Me an Hour";
+  static const String empowerWireless =
+      "Empower wireless leadership rather than prospective experiences. Energetically myocardial clicks-and-mortar testing procedure products.";
   static const String showDetailed =
       "show detailed information about result of medical tests and provide required doctor specification";
   static const String homeBanner =
