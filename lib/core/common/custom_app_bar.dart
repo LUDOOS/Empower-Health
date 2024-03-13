@@ -5,8 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomAppBar extends StatelessWidget {
-  const CustomAppBar({super.key});
-
+  const CustomAppBar({
+    super.key,
+    this.icon = false,
+    this.onPressed,
+  });
+  final bool icon;
+  final Function()? onPressed;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -24,6 +29,15 @@ class CustomAppBar extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
+          Spacer(),
+          if (icon)
+            IconButton(
+              onPressed: onPressed,
+              icon: const Icon(
+                Icons.arrow_forward_rounded,
+                color: AppColors.primary,
+              ),
+            )
         ],
       ),
     );

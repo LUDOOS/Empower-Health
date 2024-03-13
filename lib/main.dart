@@ -1,5 +1,4 @@
 import 'package:empower_health/core/caching/caching_helper.dart';
-import 'package:empower_health/core/caching/caching_key.dart';
 import 'package:empower_health/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -32,10 +31,10 @@ class MyApp extends StatelessWidget {
       builder: (_, child) {
         FlutterNativeSplash.remove();
         return MaterialApp(
-          initialRoute:
-              CachingHelper.instance!.readBoolean(CachingKey.ONBOARDING)
-                  ? Routes.HOME
-                  : Routes.BOARDING,
+          initialRoute: Routes.MEDICAL,
+          // CachingHelper.instance!.readBoolean(CachingKey.ONBOARDING)
+          //     ? Routes.HOME
+          //     : Routes.BOARDING,
           navigatorKey: CustomNavigator.navigatorState,
           onGenerateRoute: CustomNavigator.onCreateRoute,
           debugShowCheckedModeBanner: false,
