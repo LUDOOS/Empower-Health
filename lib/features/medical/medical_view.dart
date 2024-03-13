@@ -1,7 +1,7 @@
 import 'package:empower_health/core/common/primary_button.dart';
 import 'package:empower_health/core/navigation/custom_navigator.dart';
 import 'package:empower_health/core/navigation/routes.dart';
-import 'package:empower_health/core/utils/app_decoration.dart';
+import 'package:empower_health/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -36,17 +36,13 @@ class _MedicalViewState extends State<MedicalView> {
               Container(
                 width: double.infinity,
                 padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 14.h),
-                decoration: AppDecoration.style(),
+                decoration: AppStyles.container(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       "Upload Your Medical Analysis",
-                      style: TextStyle(
-                        fontSize: 24.sp,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.blue[900],
-                      ),
+                      style: AppStyles.bigText(),
                     ),
                     Text(
                       "Upload your medical analysis photo and some information",

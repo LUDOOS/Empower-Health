@@ -25,7 +25,7 @@ class ResultView extends StatelessWidget {
               Container(
                 width: double.infinity,
                 padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 14.h),
-                decoration: AppDecoration.style(),
+                decoration: AppStyles.container(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       builder: (_, child) {
         FlutterNativeSplash.remove();
         return MaterialApp(
-          initialRoute: Routes.MEDICAL,
+          initialRoute: Routes.LOGIN,
           // CachingHelper.instance!.readBoolean(CachingKey.ONBOARDING)
           //     ? Routes.HOME
           //     : Routes.BOARDING,
