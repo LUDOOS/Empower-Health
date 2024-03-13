@@ -1,4 +1,6 @@
 import 'package:empower_health/core/common/primary_button.dart';
+import 'package:empower_health/core/navigation/custom_navigator.dart';
+import 'package:empower_health/core/navigation/routes.dart';
 import 'package:empower_health/core/utils/app_decoration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -80,7 +82,9 @@ class _MedicalViewState extends State<MedicalView> {
                     ),
                     SizedBox(height: 40.h),
                     PrimaryButton(
-                      onTap: () {},
+                      onTap: () {
+                        CustomNavigator.push(Routes.RESULT);
+                      },
                       borderRadius: 8.r,
                       text: 'Show Result',
                     ),

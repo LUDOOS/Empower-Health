@@ -1,3 +1,4 @@
+import 'package:empower_health/core/utils/app_decoration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -19,8 +20,7 @@ class CustomButton extends StatelessWidget {
         width: double.infinity,
         height: 50.h,
         padding: EdgeInsets.symmetric(horizontal: 24.w),
-        decoration: BoxDecoration(
-            color: AppColors.white, borderRadius: BorderRadius.circular(8.r)),
+        decoration: AppDecoration.style(),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
