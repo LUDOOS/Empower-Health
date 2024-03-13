@@ -15,6 +15,7 @@ class OnboardingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xffBDBBBB),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -40,9 +41,9 @@ class OnboardingView extends StatelessWidget {
                   color: Colors.white,
                 ),
               ),
-              SizedBox(height: 25.h),
+              SizedBox(height: 60.h),
               Image.asset(AppImages.home),
-              SizedBox(height: 30.h),
+              SizedBox(height: 43.h),
               PrimaryButton(
                 onTap: () {
                   CachingHelper.instance

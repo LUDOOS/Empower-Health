@@ -9,16 +9,15 @@ class ServicesWidget extends StatelessWidget {
   const ServicesWidget({
     super.key,
   });
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 160.h,
+      height: 165.h,
       child: Row(
         children: [
           Expanded(
             child: Container(
-              padding: EdgeInsets.symmetric(vertical: 10.w),
+              padding: EdgeInsets.symmetric(vertical: 10.h),
               decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
@@ -44,6 +43,7 @@ class ServicesWidget extends StatelessWidget {
                   ),
                   SizedBox(
                     width: 122.w,
+                    height: 62.h,
                     child: Text(
                       AppStrings.showDetailed,
                       textAlign: TextAlign.center,
@@ -70,6 +70,7 @@ class ServicesWidget extends StatelessWidget {
           SizedBox(width: 20.w),
           Expanded(
             child: Container(
+              padding: EdgeInsets.symmetric(vertical: 10.h),
               decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
@@ -95,6 +96,7 @@ class ServicesWidget extends StatelessWidget {
                   ),
                   SizedBox(
                     width: 122.w,
+                    height: 62.h,
                     child: Text(
                       AppStrings.showDetailed,
                       textAlign: TextAlign.center,
