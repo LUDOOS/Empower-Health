@@ -34,7 +34,7 @@ class GreetingsWidget extends StatelessWidget {
           ],
         ),
         GestureDetector(
-            onTap: () => CustomNavigator.push(Routes.HOME),
+            onTap: () => CustomNavigator.push(Routes.PROFILE),
             child: SvgPicture.asset(AppImages.user)),
       ],
     );

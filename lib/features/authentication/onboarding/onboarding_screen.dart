@@ -1,3 +1,5 @@
+import 'package:empower_health/core/caching/caching_helper.dart';
+import 'package:empower_health/core/caching/caching_key.dart';
 import 'package:empower_health/core/common/custom_app_bar.dart';
 import 'package:empower_health/core/common/primary_button.dart';
 import 'package:empower_health/core/navigation/custom_navigator.dart';
@@ -42,7 +44,11 @@ class OnboardingView extends StatelessWidget {
               Image.asset(AppImages.home),
               SizedBox(height: 30.h),
               PrimaryButton(
-                onTap: () => CustomNavigator.push(Routes.HOME),
+                onTap: () {
+                  CachingHelper.instance
+                      ?.writeData(CachingKey.ONBOARDING, true);
+                  CustomNavigator.push(Routes.HOME, clean: true);
+                },
                 icon: Icons.arrow_forward_rounded,
                 text: "Get Started ",
               )

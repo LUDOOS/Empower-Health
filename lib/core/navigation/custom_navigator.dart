@@ -1,6 +1,7 @@
 import 'package:empower_health/core/navigation/routes.dart';
 import 'package:empower_health/features/authentication/onboarding/onboarding_screen.dart';
 import 'package:empower_health/features/home/home_view.dart';
+import 'package:empower_health/features/profile/profile_view.dart';
 import 'package:flutter/material.dart';
 
 import '../../main.dart';
@@ -31,6 +32,17 @@ abstract class CustomNavigator {
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
                 const HomeView(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return SlideTransition(
+                position: animation.drive(tween),
+                child: child,
+              );
+            });
+      case Routes.PROFILE:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const ProfileView(),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
               return SlideTransition(

@@ -1,3 +1,5 @@
+import 'package:empower_health/core/caching/caching_helper.dart';
+import 'package:empower_health/core/caching/caching_key.dart';
 import 'package:empower_health/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,8 +9,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/navigation/custom_navigator.dart';
 import 'core/navigation/routes.dart';
 
-void main() {
+void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  await CachingHelper.init();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(const MyApp());
 }
@@ -29,11 +32,20 @@ class MyApp extends StatelessWidget {
       builder: (_, child) {
         FlutterNativeSplash.remove();
         return MaterialApp(
-          initialRoute: Routes.BOARDING,
+          initialRoute:
+              CachingHelper.instance!.readBoolean(CachingKey.ONBOARDING)
+                  ? Routes.HOME
+                  : Routes.BOARDING,
           navigatorKey: CustomNavigator.navigatorState,
           onGenerateRoute: CustomNavigator.onCreateRoute,
           debugShowCheckedModeBanner: false,
-          theme: ThemeData(scaffoldBackgroundColor: AppColors.background),
+          theme: ThemeData(
+            scaffoldBackgroundColor: AppColors.background,
+            appBarTheme: const AppBarTheme(
+              backgroundColor: Colors.transparent,
+              iconTheme: IconThemeData(color: AppColors.primary),
+            ),
+          ),
           home: child,
         );
       },
