@@ -3,6 +3,7 @@ import 'package:empower_health/features/authentication/view/forget_password_view
 import 'package:empower_health/features/authentication/view/login_view.dart';
 import 'package:empower_health/features/authentication/view/onboarding_view.dart';
 import 'package:empower_health/features/authentication/view/signup_view.dart';
+import 'package:empower_health/features/authentication/view/splash_view.dart';
 import 'package:empower_health/features/home/home_view.dart';
 import 'package:empower_health/features/medical/medical_view.dart';
 import 'package:empower_health/features/medical/result_view.dart';
@@ -22,6 +23,17 @@ abstract class CustomNavigator {
 
   static Route<dynamic> onCreateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case Routes.SPLASH:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const SplashView(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return SlideTransition(
+                position: animation.drive(tween),
+                child: child,
+              );
+            });
       case Routes.BOARDING:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>

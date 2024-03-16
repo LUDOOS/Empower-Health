@@ -1,5 +1,6 @@
 class Routes {
   static const BOARDING = "BOARDING";
+  static const SPLASH = "SPLASH";
   static const HOME = "HOME";
   static const PROFILE = "PROFILE";
   static const MEDICAL = "MEDICAL";

@@ -2,16 +2,14 @@ import 'package:empower_health/core/caching/caching_helper.dart';
 import 'package:empower_health/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'core/navigation/custom_navigator.dart';
 import 'core/navigation/routes.dart';
 
 void main() async {
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   await CachingHelper.init();
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(const MyApp());
 }
 
@@ -29,12 +27,8 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (_, child) {
-        FlutterNativeSplash.remove();
         return MaterialApp(
-          initialRoute: Routes.LOGIN,
-          // CachingHelper.instance!.readBoolean(CachingKey.ONBOARDING)
-          //     ? Routes.HOME
-          //     : Routes.BOARDING,
+          initialRoute: Routes.SPLASH,
           navigatorKey: CustomNavigator.navigatorState,
           onGenerateRoute: CustomNavigator.onCreateRoute,
           debugShowCheckedModeBanner: false,
