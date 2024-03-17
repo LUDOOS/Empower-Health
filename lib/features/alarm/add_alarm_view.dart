@@ -1,3 +1,4 @@
+import 'package:empower_health/core/navigation/custom_navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -30,7 +31,7 @@ class _AddAlarmViewState extends State<AddAlarmView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const CustomAppBar(icon: true),
+              CustomAppBar(icon: true, onPressed: () => CustomNavigator.pop()),
               SizedBox(height: 40.h),
               Container(
                 width: double.infinity,
@@ -76,7 +77,7 @@ class _AddAlarmViewState extends State<AddAlarmView> {
                     SizedBox(height: 30.h),
                     PrimaryButton(
                       onTap: () {
-                        // Handle button tap
+                        CustomNavigator.pop();
                       },
                       height: 45.h,
                       borderRadius: 8.r,

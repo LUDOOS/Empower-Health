@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/common/custom_app_bar.dart';
 import '../../../core/common/cutsom_text_field.dart';
 import '../../../core/common/primary_button.dart';
+import '../../../core/navigation/custom_navigator.dart';
 import '../../../core/utils/app_styles.dart';
 
 class ContactUsView extends StatefulWidget {
@@ -28,7 +29,7 @@ class _ContactUsViewState extends State<ContactUsView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const CustomAppBar(icon: true),
+              CustomAppBar(icon: true, onPressed: () => CustomNavigator.pop()),
               SizedBox(height: 40.h),
               Container(
                 width: double.infinity,
@@ -65,7 +66,7 @@ class _ContactUsViewState extends State<ContactUsView> {
                     SizedBox(height: 30.h),
                     PrimaryButton(
                       onTap: () {
-                        // Handle button tap
+                        CustomNavigator.pop();
                       },
                       width: double.infinity,
                       height: 45.h,

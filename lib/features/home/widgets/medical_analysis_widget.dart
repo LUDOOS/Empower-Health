@@ -1,3 +1,5 @@
+import 'package:empower_health/core/navigation/custom_navigator.dart';
+import 'package:empower_health/core/navigation/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -46,9 +48,9 @@ class MedicalAnalysisWidget extends StatelessWidget {
             ),
           ),
           PrimaryButton(
-            onTap: () {},
+            onTap: () => CustomNavigator.push(Routes.MEDICAL_TYPE),
             height: 28.h,
-            width: 176.w,
+            width: 180.w,
             borderRadius: 7.r,
             text: "Upload Medical Analysis Now",
             fontSize: 12.sp,

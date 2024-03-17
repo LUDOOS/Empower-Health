@@ -1,3 +1,5 @@
+import 'package:empower_health/core/navigation/custom_navigator.dart';
+import 'package:empower_health/core/navigation/routes.dart';
 import 'package:empower_health/core/utils/app_colors.dart';
 import 'package:empower_health/features/profile/widgets/diagnosis_widget.dart';
 import 'package:empower_health/features/profile/widgets/user_avatar_widget.dart';
@@ -12,7 +14,12 @@ class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: AppColors.primary),
+          onPressed: () => CustomNavigator.push(Routes.HOME),
+        ),
+      ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 18.w),
         child: Column(
@@ -39,12 +46,14 @@ class ProfileView extends StatelessWidget {
             SizedBox(height: 20.h),
             CustomButton(
               title: 'Your Alarms',
-              onTap: () {},
+              onTap: () => CustomNavigator.push(Routes.ALARM),
             ),
             SizedBox(height: 10.h),
             CustomButton(
               title: 'Logout',
-              onTap: () {},
+              onTap: () {
+                CustomNavigator.push(Routes.LOGIN, clean: true);
+              },
             ),
           ],
         ),

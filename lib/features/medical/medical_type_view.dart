@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../core/navigation/custom_navigator.dart';
+import '../../core/navigation/routes.dart';
 import '../../core/utils/app_colors.dart';
 import '../../core/utils/app_images.dart';
 import '../../core/utils/app_strings.dart';
@@ -32,12 +34,14 @@ class MedicalTypeView extends StatelessWidget {
               SizedBox(height: 50.h),
               CustomButton(
                 title: 'Profile',
-                onTap: () {},
+                onTap: () => CustomNavigator.push(Routes.PROFILE),
               ),
               SizedBox(height: 15.h),
               CustomButton(
                 title: 'Logout',
-                onTap: () {},
+                onTap: () {
+                  CustomNavigator.push(Routes.LOGIN, clean: true);
+                },
               ),
             ],
           ),

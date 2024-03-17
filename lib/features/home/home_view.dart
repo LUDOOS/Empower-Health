@@ -47,7 +47,9 @@ class HomeView extends StatelessWidget {
               SizedBox(height: 10.h),
               CustomButton(
                 title: 'Logout',
-                onTap: () {},
+                onTap: () {
+                  CustomNavigator.push(Routes.LOGIN, clean: true);
+                },
               ),
             ],
           ),

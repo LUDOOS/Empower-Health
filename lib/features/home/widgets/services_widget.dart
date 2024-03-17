@@ -1,8 +1,9 @@
+import 'package:empower_health/core/navigation/custom_navigator.dart';
+import 'package:empower_health/core/navigation/routes.dart';
 import 'package:empower_health/core/utils/app_colors.dart';
 import 'package:empower_health/core/utils/app_images.dart';
 import 'package:empower_health/core/utils/app_strings.dart';
 import 'package:empower_health/core/utils/app_styles.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -14,7 +15,7 @@ class ServicesWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 240.h,
+      height: 250.h,
       child: Row(
         children: [
           Expanded(
@@ -81,7 +82,7 @@ class ServiceCard extends StatelessWidget {
           SizedBox(height: 5.h),
           SizedBox(
             width: 128.w,
-            height: 28.h,
+            height: 31.h,
             child: Text(
               AppStrings.showDetailed,
               style: TextStyle(
@@ -91,14 +92,17 @@ class ServiceCard extends StatelessWidget {
             ),
           ),
           SizedBox(height: 5.h),
-          Text(
-            "upload medical test",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 12.sp,
-              color: AppColors.primary,
-              decoration: TextDecoration.underline,
-              decorationColor: AppColors.primary,
+          InkWell(
+            onTap: () => CustomNavigator.push(Routes.MEDICAL),
+            child: Text(
+              "upload medical test",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 12.sp,
+                color: AppColors.primary,
+                decoration: TextDecoration.underline,
+                decorationColor: AppColors.primary,
+              ),
             ),
           ),
         ],

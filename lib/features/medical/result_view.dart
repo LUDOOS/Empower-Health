@@ -21,7 +21,7 @@ class ResultView extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(height: 20.h),
-              CustomAppBar(icon: true, onPressed: () {}),
+              CustomAppBar(icon: true, onPressed: () => CustomNavigator.pop()),
               SizedBox(height: 50.h),
               Container(
                 width: double.infinity,
@@ -65,7 +65,7 @@ class ResultView extends StatelessWidget {
                     SizedBox(height: 40.h),
                     Center(
                       child: PrimaryButton(
-                        onTap: () {},
+                        onTap: () => CustomNavigator.push(Routes.ADDALARM),
                         color: const Color(0xffFDE2F6),
                         width: 290.w,
                         fontSize: 12.sp,

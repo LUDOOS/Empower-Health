@@ -15,7 +15,7 @@ class AlarmView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: SingleChildScrollView(
+      body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 18.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,7 +33,7 @@ class AlarmView extends StatelessWidget {
             SizedBox(height: 10.h),
             ListView.separated(
               shrinkWrap: true,
-              itemCount: 3,
+              itemCount: 2,
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) => const AlarmWidget(),
               separatorBuilder: (context, index) => SizedBox(height: 10.h),
@@ -51,7 +51,9 @@ class AlarmView extends StatelessWidget {
             SizedBox(height: 10.h),
             CustomButton(
               title: 'Logout',
-              onTap: () {},
+              onTap: () {
+                CustomNavigator.push(Routes.LOGIN, clean: true);
+              },
             ),
             SizedBox(height: 30.h),
           ],

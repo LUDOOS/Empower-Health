@@ -31,7 +31,7 @@ class _MedicalViewState extends State<MedicalView> {
           child: Column(
             children: [
               SizedBox(height: 20.h),
-              CustomAppBar(icon: true, onPressed: () {}),
+              CustomAppBar(icon: true, onPressed: () => CustomNavigator.pop()),
               SizedBox(height: 50.h),
               Container(
                 width: double.infinity,
