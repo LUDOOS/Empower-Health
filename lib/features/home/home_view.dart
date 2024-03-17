@@ -1,3 +1,5 @@
+import 'package:empower_health/core/navigation/custom_navigator.dart';
+import 'package:empower_health/core/navigation/routes.dart';
 import 'package:empower_health/core/utils/app_colors.dart';
 import 'package:empower_health/features/home/widgets/banner_widget.dart';
 import 'package:empower_health/features/home/widgets/greetings_widget.dart';
@@ -35,12 +37,12 @@ class HomeView extends StatelessWidget {
               const MedicalAnalysisWidget(),
               CustomButton(
                 title: 'Profile',
-                onTap: () {},
+                onTap: () => CustomNavigator.push(Routes.PROFILE),
               ),
               SizedBox(height: 10.h),
               CustomButton(
                 title: 'Contact Us',
-                onTap: () {},
+                onTap: () => CustomNavigator.push(Routes.CONTACT_US),
               ),
               SizedBox(height: 10.h),
               CustomButton(

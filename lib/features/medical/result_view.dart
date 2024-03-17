@@ -1,4 +1,5 @@
 import 'package:empower_health/core/common/custom_button.dart';
+import 'package:empower_health/core/common/primary_button.dart';
 import 'package:empower_health/core/navigation/custom_navigator.dart';
 import 'package:empower_health/core/navigation/routes.dart';
 import 'package:empower_health/core/utils/utils.dart';
@@ -31,11 +32,7 @@ class ResultView extends StatelessWidget {
                   children: [
                     Text(
                       "Result of your medical analysis",
-                      style: TextStyle(
-                        fontSize: 24.sp,
-                        fontWeight: FontWeight.w600,
-                        color: const Color(0xff2980B9),
-                      ),
+                      style: AppStyles.smallSemiBold(size: 24.sp),
                     ),
                     SizedBox(height: 10.h),
                     Center(
@@ -47,11 +44,7 @@ class ResultView extends StatelessWidget {
                     SizedBox(height: 20.h),
                     Text(
                       "Initial diagnosis:",
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w600,
-                        color: const Color(0xff2980B9),
-                      ),
+                      style: AppStyles.smallSemiBold(),
                     ),
                     Text(
                       AppStrings.empowerWireless,
@@ -62,22 +55,25 @@ class ResultView extends StatelessWidget {
                     SizedBox(height: 10.h),
                     Text(
                       "Doctor specialization:",
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w600,
-                        color: const Color(0xff2980B9),
-                      ),
+                      style: AppStyles.smallSemiBold(),
                     ),
                     SizedBox(height: 16.h),
                     Text(
                       "Nearest doctor:",
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w600,
-                        color: const Color(0xff2980B9),
+                      style: AppStyles.smallSemiBold(),
+                    ),
+                    SizedBox(height: 40.h),
+                    Center(
+                      child: PrimaryButton(
+                        onTap: () {},
+                        color: const Color(0xffFDE2F6),
+                        width: 290.w,
+                        fontSize: 12.sp,
+                        textColor: AppColors.primary,
+                        text: "you can set alarm for your drugs appointment",
                       ),
                     ),
-                    SizedBox(height: 20.h),
+                    SizedBox(height: 10.h),
                   ],
                 ),
               ),

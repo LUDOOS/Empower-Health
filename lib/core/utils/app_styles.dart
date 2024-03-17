@@ -41,4 +41,10 @@ class AppStyles {
         fontWeight: weight ?? FontWeight.normal,
         color: color ?? AppColors.grey,
       );
+
+  static TextStyle smallSemiBold({double? size}) => TextStyle(
+        fontSize: size ?? 14.sp,
+        fontWeight: FontWeight.w600,
+        color: const Color(0xff2980B9),
+      );
 }

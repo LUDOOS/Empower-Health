@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (_, child) {
         return MaterialApp(
-          initialRoute: Routes.SPLASH,
+          initialRoute: Routes.MEDICAL_TYPE,
           navigatorKey: CustomNavigator.navigatorState,
           onGenerateRoute: CustomNavigator.onCreateRoute,
           debugShowCheckedModeBanner: false,

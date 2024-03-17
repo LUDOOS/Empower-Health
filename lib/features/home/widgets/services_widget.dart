@@ -46,11 +46,17 @@ class ServiceCard extends StatelessWidget {
   const ServiceCard({
     super.key,
     required this.color,
+    this.height,
+    this.width,
   });
   final Color color;
+  final double? height;
+  final double? width;
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: height,
+      width: width,
       padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 16.w),
       decoration: AppStyles.container(
         color: color,

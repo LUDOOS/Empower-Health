@@ -15,7 +15,7 @@ class MedicalAnalysisWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 200.h,
+      height: 220.h,
       margin: EdgeInsets.symmetric(vertical: 24.h),
       padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
       decoration: BoxDecoration(
@@ -39,7 +39,7 @@ class MedicalAnalysisWidget extends StatelessWidget {
           ),
           SizedBox(
             width: 160.w,
-            height: 50.h,
+            height: 60.h,
             child: Text(
               AppStrings.showDetailed,
               style: TextStyle(fontSize: 12.sp, color: AppColors.darkBlue),

@@ -13,6 +13,7 @@ class PrimaryButton extends StatelessWidget {
   final double? fontSize;
   final IconData? icon;
   final Color? color;
+  final Color? textColor;
   const PrimaryButton({
     required this.onTap,
     required this.text,
@@ -23,6 +24,7 @@ class PrimaryButton extends StatelessWidget {
     this.color,
     super.key,
     this.icon,
+    this.textColor,
   });
   @override
   Widget build(BuildContext context) {
@@ -43,7 +45,7 @@ class PrimaryButton extends StatelessWidget {
                   Text(
                     text,
                     style: TextStyle(
-                      color: Colors.white,
+                      color: textColor ?? Colors.white,
                       fontSize: fontSize ?? 16.sp,
                     ),
                   ),
@@ -54,7 +56,7 @@ class PrimaryButton extends StatelessWidget {
             : Text(
                 text,
                 style: TextStyle(
-                  color: AppColors.white,
+                  color: textColor ?? AppColors.white,
                   fontSize: fontSize ?? 16.sp,
                 ),
               ),

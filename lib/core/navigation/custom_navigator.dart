@@ -1,10 +1,14 @@
 import 'package:empower_health/core/navigation/routes.dart';
+import 'package:empower_health/features/alarm/add_alarm_view.dart';
+import 'package:empower_health/features/alarm/alarm_view.dart';
+import 'package:empower_health/features/authentication/view/contact_us_view.dart';
 import 'package:empower_health/features/authentication/view/forget_password_view.dart';
 import 'package:empower_health/features/authentication/view/login_view.dart';
 import 'package:empower_health/features/authentication/view/onboarding_view.dart';
 import 'package:empower_health/features/authentication/view/signup_view.dart';
 import 'package:empower_health/features/authentication/view/splash_view.dart';
 import 'package:empower_health/features/home/home_view.dart';
+import 'package:empower_health/features/medical/medical_type_view.dart';
 import 'package:empower_health/features/medical/medical_view.dart';
 import 'package:empower_health/features/medical/result_view.dart';
 import 'package:empower_health/features/profile/profile_view.dart';
@@ -115,6 +119,50 @@ abstract class CustomNavigator {
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
                 const ForgetPasswordView(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return SlideTransition(
+                position: animation.drive(tween),
+                child: child,
+              );
+            });
+      case Routes.MEDICAL_TYPE:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const MedicalTypeView(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return SlideTransition(
+                position: animation.drive(tween),
+                child: child,
+              );
+            });
+      case Routes.CONTACT_US:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const ContactUsView(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return SlideTransition(
+                position: animation.drive(tween),
+                child: child,
+              );
+            });
+      case Routes.ALARM:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const AlarmView(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return SlideTransition(
+                position: animation.drive(tween),
+                child: child,
+              );
+            });
+      case Routes.ADDALARM:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const AddAlarmView(),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
               return SlideTransition(
