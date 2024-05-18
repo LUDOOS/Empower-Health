@@ -1,7 +1,9 @@
 import 'package:empower_health/core/caching/caching_helper.dart';
 import 'package:empower_health/core/utils/app_colors.dart';
+import 'package:empower_health/features/authentication/cubit/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'core/navigation/custom_navigator.dart';
@@ -27,19 +29,26 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (_, child) {
-        return MaterialApp(
-          initialRoute: Routes.SPLASH,
-          navigatorKey: CustomNavigator.navigatorState,
-          onGenerateRoute: CustomNavigator.onCreateRoute,
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            scaffoldBackgroundColor: AppColors.background,
-            appBarTheme: const AppBarTheme(
-              backgroundColor: Colors.transparent,
-              iconTheme: IconThemeData(color: AppColors.primary),
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => AuthCubit(),
             ),
+          ],
+          child: MaterialApp(
+            initialRoute: Routes.SPLASH,
+            navigatorKey: CustomNavigator.navigatorState,
+            onGenerateRoute: CustomNavigator.onCreateRoute,
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              scaffoldBackgroundColor: AppColors.background,
+              appBarTheme: const AppBarTheme(
+                backgroundColor: Colors.transparent,
+                iconTheme: IconThemeData(color: AppColors.primary),
+              ),
+            ),
+            home: child,
           ),
-          home: child,
         );
       },
     );

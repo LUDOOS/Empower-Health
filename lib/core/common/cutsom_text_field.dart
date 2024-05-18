@@ -7,13 +7,14 @@ class CustomTextField extends StatelessWidget {
   final String hintText;
   final IconData? icon;
   final bool isMultiline;
-
+  final String? Function(String?)? validator;
   const CustomTextField({
     Key? key,
     required this.controller,
     required this.hintText,
     this.icon,
     this.isMultiline = false,
+    this.validator,
   }) : super(key: key);
 
   @override
@@ -28,10 +29,11 @@ class CustomTextField extends StatelessWidget {
       ),
       alignment: Alignment.center,
       child: isMultiline
-          ? TextField(
+          ? TextFormField(
               controller: controller,
               keyboardType: TextInputType.multiline,
               maxLines: null,
+              validator: validator,
               minLines: 3,
               decoration: InputDecoration(
                 prefixIcon: icon != null ? Icon(icon) : null,
