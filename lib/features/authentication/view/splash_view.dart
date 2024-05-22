@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SplashView extends StatefulWidget {
-  const SplashView({Key? key}) : super(key: key);
+  const SplashView({super.key});
 
   @override
   _SplashViewState createState() => _SplashViewState();
@@ -20,11 +20,14 @@ class _SplashViewState extends State<SplashView> {
   void initState() {
     super.initState();
     Timer(const Duration(seconds: 3), () {
+      CachingHelper.instance!.readBoolean(CachingKey.ONBOARDING)?null:
+      CustomNavigator.push(Routes.BOARDING, clean: true);
       CustomNavigator.push(
-          CachingHelper.instance!.readBoolean(CachingKey.ONBOARDING)
-              ? Routes.LOGIN
-              : Routes.BOARDING,
+          CachingHelper.instance!.readBoolean(CachingKey.IS_LOGIN)?
+          Routes.HOME :
+          Routes.LOGIN,
           clean: true);
+
     });
   }
 

@@ -2,11 +2,11 @@ import 'package:empower_health/core/navigation/custom_navigator.dart';
 import 'package:empower_health/core/navigation/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../core/common/primary_button.dart';
+import '../../../../core/utils/app_colors.dart';
+import '../../../../core/utils/app_images.dart';
+import '../../../../core/utils/app_strings.dart';
 
-import '../../../core/common/primary_button.dart';
-import '../../../core/utils/app_colors.dart';
-import '../../../core/utils/app_images.dart';
-import '../../../core/utils/app_strings.dart';
 
 class MedicalAnalysisWidget extends StatelessWidget {
   const MedicalAnalysisWidget({

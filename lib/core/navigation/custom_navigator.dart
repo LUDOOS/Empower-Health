@@ -7,7 +7,7 @@ import 'package:empower_health/features/authentication/view/login_view.dart';
 import 'package:empower_health/features/authentication/view/onboarding_view.dart';
 import 'package:empower_health/features/authentication/view/signup_view.dart';
 import 'package:empower_health/features/authentication/view/splash_view.dart';
-import 'package:empower_health/features/home/home_view.dart';
+import 'package:empower_health/features/home/view/home_view.dart';
 import 'package:empower_health/features/medical/medical_type_view.dart';
 import 'package:empower_health/features/medical/medical_view.dart';
 import 'package:empower_health/features/medical/result_view.dart';

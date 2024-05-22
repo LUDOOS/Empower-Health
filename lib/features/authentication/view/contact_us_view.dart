@@ -8,7 +8,7 @@ import '../../../core/navigation/custom_navigator.dart';
 import '../../../core/utils/app_styles.dart';
 
 class ContactUsView extends StatefulWidget {
-  const ContactUsView({Key? key}) : super(key: key);
+  const ContactUsView({super.key});
 
   @override
   _ContactUsViewState createState() => _ContactUsViewState();

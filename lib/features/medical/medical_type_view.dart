@@ -1,15 +1,14 @@
 import 'package:empower_health/core/common/custom_button.dart';
 import 'package:empower_health/core/utils/app_styles.dart';
-import 'package:empower_health/features/home/widgets/greetings_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-
 import '../../core/navigation/custom_navigator.dart';
 import '../../core/navigation/routes.dart';
 import '../../core/utils/app_colors.dart';
 import '../../core/utils/app_images.dart';
 import '../../core/utils/app_strings.dart';
+import '../home/view/widgets/greetings_widget.dart';
 
 class MedicalTypeView extends StatelessWidget {
   const MedicalTypeView({super.key});
@@ -22,7 +21,7 @@ class MedicalTypeView extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
           child: Column(
             children: [
-              const GreetingsWidget(),
+              GreetingsWidget(name: 'name',),
               SizedBox(height: 50.h),
               const Text("What services are you looking for"),
               SizedBox(height: 30.h),

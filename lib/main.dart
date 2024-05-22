@@ -1,6 +1,7 @@
 import 'package:empower_health/core/caching/caching_helper.dart';
 import 'package:empower_health/core/utils/app_colors.dart';
 import 'package:empower_health/features/authentication/cubit/auth_cubit.dart';
+import 'package:empower_health/features/home/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,6 +34,9 @@ class MyApp extends StatelessWidget {
           providers: [
             BlocProvider(
               create: (context) => AuthCubit(),
+            ),
+            BlocProvider(
+              create: (context) => HomeCubit(),
             ),
           ],
           child: MaterialApp(

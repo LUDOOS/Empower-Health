@@ -1,3 +1,4 @@
+import 'package:empower_health/core/caching/caching_key.dart';
 import 'package:empower_health/core/common/custom_app_bar.dart';
 import 'package:empower_health/core/utils/app_images.dart';
 import 'package:empower_health/features/authentication/cubit/auth_cubit.dart';
@@ -15,7 +16,7 @@ import '../../../core/utils/app_styles.dart';
 import 'widgets/or_with_email.dart';
 
 class LoginView extends StatefulWidget {
-  const LoginView({Key? key}) : super(key: key);
+  const LoginView({super.key});
 
   @override
   _LoginViewState createState() => _LoginViewState();
@@ -33,7 +34,7 @@ class _LoginViewState extends State<LoginView> {
         child: BlocConsumer<AuthCubit, AuthState>(
           listener: (context, state) {
             if (state is AuthSuccess) {
-              //CustomNavigator.push(Routes.HOME);
+              CustomNavigator.push(Routes.HOME);
             }
           },
           builder: (context, state) => SingleChildScrollView(
@@ -108,7 +109,7 @@ class _LoginViewState extends State<LoginView> {
                         ),
                         SizedBox(height: 40.h),
                         state is AuthLoading
-                            ? Center(child: CircularProgressIndicator())
+                            ? const Center(child: CircularProgressIndicator())
                             : PrimaryButton(
                                 onTap: () {
                                   if (_formKey.currentState!.validate()) {
@@ -132,7 +133,7 @@ class _LoginViewState extends State<LoginView> {
                         ),
                         state is AuthSuccess
                             ? Text(state.message)
-                            : Text("Null"),
+                            : const Text(CachingKey.TOKEN),
                       ],
                     ),
                   ),

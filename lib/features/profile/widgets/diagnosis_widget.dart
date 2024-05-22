@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../../../core/utils/app_colors.dart';
-import '../../../core/utils/app_images.dart';
 import '../../../core/utils/app_strings.dart';
 
 class DiagnosisWidget extends StatelessWidget {
@@ -14,7 +12,7 @@ class DiagnosisWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
+      width: 500.w,
       height: 156.h,
       padding: EdgeInsets.symmetric(vertical: 18.h),
       decoration: BoxDecoration(
@@ -31,9 +29,9 @@ class DiagnosisWidget extends StatelessWidget {
       ),
       child: Row(
         children: [
-          SizedBox(width: 5.w),
-          SvgPicture.asset(AppImages.diagnosis),
-          SizedBox(width: 7.w),
+          SizedBox(width: 15.w),
+          // SvgPicture.asset(AppImages.diagnosis),
+          // SizedBox(width: 7.w),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -41,13 +39,15 @@ class DiagnosisWidget extends StatelessWidget {
                 "Initial diagnosis:",
                 style: TextStyle(
                     fontWeight: FontWeight.w600,
-                    color: Color(0xff2980B9),
+                    color: const Color(0xff2980B9),
                     fontSize: 14.sp),
               ),
               SizedBox(
-                width: 250.w,
+                width: 350.w,
+                height: 80.h,
                 child: Text(
                   AppStrings.empowerWireless,
+                  overflow: TextOverflow.visible,
                   style: TextStyle(fontSize: 14.sp),
                 ),
               ),

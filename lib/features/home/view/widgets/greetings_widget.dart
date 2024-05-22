@@ -4,14 +4,20 @@ import 'package:empower_health/core/utils/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../../../../core/utils/app_colors.dart';
 
-import '../../../core/utils/app_colors.dart';
-
-class GreetingsWidget extends StatelessWidget {
-  const GreetingsWidget({
+class GreetingsWidget extends StatefulWidget {
+     GreetingsWidget({
     super.key,
+    required this.name,
   });
+String name;
 
+  @override
+  State<GreetingsWidget> createState() => _GreetingsWidgetState();
+}
+
+class _GreetingsWidgetState extends State<GreetingsWidget> {
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -27,9 +33,9 @@ class GreetingsWidget extends StatelessWidget {
                   fontSize: 17.sp,
                   color: AppColors.primary),
             ),
-            const Text(
-              "Username",
-              style: TextStyle(color: AppColors.primary),
+            Text(
+              widget.name,
+              style: const TextStyle(color: AppColors.primary),
             ),
           ],
         ),

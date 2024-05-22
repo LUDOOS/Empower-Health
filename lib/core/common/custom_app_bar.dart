@@ -29,7 +29,7 @@ class CustomAppBar extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          Spacer(),
+          const Spacer(),
           if (icon)
             IconButton(
               onPressed: onPressed,
