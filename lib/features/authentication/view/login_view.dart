@@ -1,4 +1,3 @@
-import 'package:empower_health/core/caching/caching_key.dart';
 import 'package:empower_health/core/common/custom_app_bar.dart';
 import 'package:empower_health/core/utils/app_images.dart';
 import 'package:empower_health/features/authentication/cubit/auth_cubit.dart';
@@ -131,9 +130,9 @@ class _LoginViewState extends State<LoginView> {
                           link: 'Sign Up',
                           onTap: () => CustomNavigator.push(Routes.SIGNUP),
                         ),
-                        state is AuthSuccess
-                            ? Text(state.message)
-                            : const Text(CachingKey.TOKEN),
+                        // state is AuthSuccess
+                        //     ? Text(state.message)
+                        //     : const Text(CachingKey.TOKEN),
                       ],
                     ),
                   ),

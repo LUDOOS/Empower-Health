@@ -20,5 +20,7 @@ class AuthRegisterSuccess extends AuthState {
 
   AuthRegisterSuccess(this.message);
 }
+class ContactUsSuccessState extends AuthState {}
+
 
 class AuthError extends AuthState {}

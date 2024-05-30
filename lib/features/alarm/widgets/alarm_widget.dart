@@ -23,7 +23,7 @@ class AlarmWidget extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Drud Name:", style: AppStyles.smallSemiBold(size: 12.sp)),
+                Text("Drug Name:", style: AppStyles.smallSemiBold(size: 12.sp)),
                 Text("Drug Frequency:",
                     style: AppStyles.smallSemiBold(size: 12.sp)),
                 Text("Drug dosage:",

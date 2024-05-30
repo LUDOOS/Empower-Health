@@ -47,12 +47,31 @@ class AuthCubit extends Cubit<AuthState> {
       log(e.toString(), name: "Register Auth Cubit");
     }
   }
+
   void getToken(dynamic result)
   {
     CachingHelper.instance?.writeData(CachingKey.USER, result.data['patient_id']);
     CachingHelper.instance?.writeData(CachingKey.TOKEN, result.data['token']);
     CachingHelper.instance
         ?.writeData(CachingKey.IS_LOGIN, true);
+  }
+
+  void sendContactMessage({
+    required String mail,
+    required String phone,
+    required String name,
+    required String message,
+  }) async {
+    NetworkHelper.instance.post(
+        endPoint: EndPoints.CONTACT,
+        data: {
+          "name": name, "message": message,
+          //"email": mail,
+          "phone": phone,
+          "patient_id": CachingHelper.instance?.readInteger(CachingKey.USER),
+        }).then((value) {
+      emit(ContactUsSuccessState());
+    });
   }
 
 }

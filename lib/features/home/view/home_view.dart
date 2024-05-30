@@ -20,7 +20,10 @@ class HomeView extends StatelessWidget {
       body: SafeArea(
         child: BlocConsumer<HomeCubit, HomeState>(
           listener: (context, state) {
-            //if (state is ) {CustomNavigator.push(Routes.HOME);}
+            if(state is LogoutSuccessState)
+              {
+                CustomNavigator.push(Routes.LOGIN, clean: true);
+              }
           },
           builder: (context, state) {
             var user = context.read<HomeCubit>().userModel;
@@ -29,7 +32,7 @@ class HomeView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                GreetingsWidget(name: user?.data.patientName??""),
+                const GreetingsWidget(),
                 SizedBox(height: 20.h),
                 const BannerWidget(),
                 Padding(
@@ -56,7 +59,6 @@ class HomeView extends StatelessWidget {
                   title: 'Logout',
                   onTap: () {
                     context.read<HomeCubit>().logout();
-                    CustomNavigator.push(Routes.LOGIN, clean: true);
                   },
                 ),
               ],

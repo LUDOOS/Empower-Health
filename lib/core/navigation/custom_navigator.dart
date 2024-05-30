@@ -8,12 +8,16 @@ import 'package:empower_health/features/authentication/view/onboarding_view.dart
 import 'package:empower_health/features/authentication/view/signup_view.dart';
 import 'package:empower_health/features/authentication/view/splash_view.dart';
 import 'package:empower_health/features/home/view/home_view.dart';
+import 'package:empower_health/features/medical/anemia/anemia_result_view.dart';
+import 'package:empower_health/features/medical/anemia/anemia_view.dart';
+import 'package:empower_health/features/medical/diabetes/diabetes_result_view.dart';
+import 'package:empower_health/features/medical/diabetes/diabetes_view.dart';
 import 'package:empower_health/features/medical/medical_type_view.dart';
-import 'package:empower_health/features/medical/medical_view.dart';
-import 'package:empower_health/features/medical/result_view.dart';
 import 'package:empower_health/features/profile/profile_view.dart';
 import 'package:flutter/material.dart';
 
+import '../../features/medical/liver/liver_result_view.dart';
+import '../../features/medical/liver/liver_view.dart';
 import '../../main.dart';
 
 const begin = Offset(0.0, 1.0);
@@ -71,10 +75,10 @@ abstract class CustomNavigator {
                 child: child,
               );
             });
-      case Routes.MEDICAL:
+      case Routes.LIVER:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-                const MedicalView(),
+                const LiverView(),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
               return SlideTransition(
@@ -82,10 +86,54 @@ abstract class CustomNavigator {
                 child: child,
               );
             });
-      case Routes.RESULT:
+      case Routes.LIVERRESULT:
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-                const ResultView(),
+                const LiverResultView(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return SlideTransition(
+                position: animation.drive(tween),
+                child: child,
+              );
+            });
+      case Routes.DIABETES:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const DiabetesView(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return SlideTransition(
+                position: animation.drive(tween),
+                child: child,
+              );
+            });
+      case Routes.DIABETESRESULT:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const DiabetesResultView(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return SlideTransition(
+                position: animation.drive(tween),
+                child: child,
+              );
+            });
+      case Routes.ANEMIA:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const AnemiaView(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return SlideTransition(
+                position: animation.drive(tween),
+                child: child,
+              );
+            });
+      case Routes.ANEMIARESULT:
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const AnemiaResultView(),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
               return SlideTransition(

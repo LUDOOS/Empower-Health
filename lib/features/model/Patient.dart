@@ -1,16 +1,16 @@
-class User {
-  User({
+class Patient {
+  Patient({
     required this.data,
   });
   late final Data data;
 
-  User.fromJson(Map<String, dynamic> json){
+  Patient.fromJson(Map<String, dynamic> json){
     data = Data.fromJson(json['data']);
   }
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
-    data['data'] = data.toJson();
+    data['data'] = data;//.toJson();
     return data;
   }
 }
@@ -22,14 +22,12 @@ class Data {
     required this.patientEmail,
     required this.patientBirthdate,
     required this.patientGender,
-    required this.patientPassword,
   });
   late final int patientId;
   late final String patientName;
   late final String patientEmail;
   late final String patientBirthdate;
   late final String patientGender;
-  late final String patientPassword;
 
   Data.fromJson(Map<String, dynamic> json){
     patientId = json['patient_id'];
@@ -37,7 +35,6 @@ class Data {
     patientEmail = json['patient_email'];
     patientBirthdate = json['patient_birthdate'];
     patientGender = json['patient_gender'];
-    patientPassword = json['patient_password'];
   }
 
   Map<String, dynamic> toJson() {
@@ -47,7 +44,6 @@ class Data {
     data['patient_email'] = patientEmail;
     data['patient_birthdate'] = patientBirthdate;
     data['patient_gender'] = patientGender;
-    data['patient_password'] = patientPassword;
     return data;
   }
 }

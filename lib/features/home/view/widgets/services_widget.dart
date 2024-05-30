@@ -1,12 +1,10 @@
 import 'package:empower_health/core/navigation/custom_navigator.dart';
 import 'package:empower_health/core/navigation/routes.dart';
 import 'package:empower_health/core/utils/app_colors.dart';
-import 'package:empower_health/core/utils/app_images.dart';
 import 'package:empower_health/core/utils/app_strings.dart';
 import 'package:empower_health/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class ServicesWidget extends StatelessWidget {
   const ServicesWidget({
@@ -21,9 +19,9 @@ class ServicesWidget extends StatelessWidget {
           Expanded(
             child: Column(
               children: [
-                const Expanded(child: ServiceCard(color: Color(0xffFDE2F6))),
+                const Expanded(child: ServiceCard(color: Color(0xffFDE2F6), type: 'Liver',)),
                 SizedBox(height: 10.h),
-                const Expanded(child: ServiceCard(color: Color(0xffDBEDFF))),
+                const Expanded(child: ServiceCard(color: Color(0xffDBEDFF), type: 'Diabetes' )),
               ],
             ),
           ),
@@ -31,7 +29,7 @@ class ServicesWidget extends StatelessWidget {
           Expanded(
             child: Column(
               children: [
-                const Expanded(child: ServiceCard(color: Color(0xffDBEDFF))),
+                const Expanded(child: ServiceCard(color: Color(0xffDBEDFF), type: 'Anemia',)),
                 SizedBox(height: 10.h),
                 const Expanded(child: SizedBox.shrink()),
               ],
@@ -47,10 +45,12 @@ class ServiceCard extends StatelessWidget {
   const ServiceCard({
     super.key,
     required this.color,
+    required this.type,
     this.height,
     this.width,
   });
   final Color color;
+  final String type;
   final double? height;
   final double? width;
   @override
@@ -67,10 +67,16 @@ class ServiceCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              SvgPicture.asset(AppImages.scanDiagnosis),
-              SizedBox(width: 5.w),
               Text(
-                "medical analysis",
+                type,
+                style: TextStyle(
+                  fontSize: 12.sp,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.darkBlue,
+                ),
+              ),
+              Text(
+                " medical analysis",
                 style: TextStyle(
                   fontSize: 12.sp,
                   fontWeight: FontWeight.bold,
@@ -93,7 +99,17 @@ class ServiceCard extends StatelessWidget {
           ),
           SizedBox(height: 5.h),
           InkWell(
-            onTap: () => CustomNavigator.push(Routes.MEDICAL),
+            onTap: () {
+              if(type == 'Liver') {
+                CustomNavigator.push(Routes.LIVER);
+              }
+              else if(type == 'Diabetes') {
+                CustomNavigator.push(Routes.DIABETES);
+              }else {
+                CustomNavigator.push(Routes.ANEMIA);
+              }
+              //CustomNavigator.push(Routes.MEDICAL);
+            },
             child: Text(
               "upload medical test",
               textAlign: TextAlign.center,

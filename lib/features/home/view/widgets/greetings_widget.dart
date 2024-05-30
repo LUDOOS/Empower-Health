@@ -1,3 +1,5 @@
+import 'package:empower_health/core/caching/caching_helper.dart';
+import 'package:empower_health/core/caching/caching_key.dart';
 import 'package:empower_health/core/navigation/custom_navigator.dart';
 import 'package:empower_health/core/navigation/routes.dart';
 import 'package:empower_health/core/utils/app_images.dart';
@@ -6,18 +8,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../core/utils/app_colors.dart';
 
-class GreetingsWidget extends StatefulWidget {
-     GreetingsWidget({
+class GreetingsWidget extends StatelessWidget {
+      const GreetingsWidget({
     super.key,
-    required this.name,
   });
-String name;
-
-  @override
-  State<GreetingsWidget> createState() => _GreetingsWidgetState();
-}
-
-class _GreetingsWidgetState extends State<GreetingsWidget> {
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -34,7 +28,7 @@ class _GreetingsWidgetState extends State<GreetingsWidget> {
                   color: AppColors.primary),
             ),
             Text(
-              widget.name,
+              CachingHelper.instance!.readString(CachingKey.NAME),
               style: const TextStyle(color: AppColors.primary),
             ),
           ],

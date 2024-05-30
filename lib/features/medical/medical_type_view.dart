@@ -21,15 +21,15 @@ class MedicalTypeView extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
           child: Column(
             children: [
-              GreetingsWidget(name: 'name',),
+              const GreetingsWidget(),
               SizedBox(height: 50.h),
               const Text("What services are you looking for"),
               SizedBox(height: 30.h),
-              const MedicalTypeServiceWidget(color: Color(0xffDBEDFF)),
+              const MedicalTypeServiceWidget(color: Color(0xffDBEDFF), type: 'Liver',),
               SizedBox(height: 30.h),
-              const MedicalTypeServiceWidget(color: Color(0xffFDE2F6)),
+              const MedicalTypeServiceWidget(color: Color(0xffFDE2F6), type: 'Diabetes',),
               SizedBox(height: 30.h),
-              const MedicalTypeServiceWidget(color: Color(0xffDBEDFF)),
+              const MedicalTypeServiceWidget(color: Color(0xffDBEDFF), type: 'Anemia',),
               SizedBox(height: 50.h),
               CustomButton(
                 title: 'Profile',
@@ -54,8 +54,10 @@ class MedicalTypeServiceWidget extends StatelessWidget {
   const MedicalTypeServiceWidget({
     super.key,
     required this.color,
+    required this.type,
   });
   final Color color;
+  final String type;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -66,35 +68,61 @@ class MedicalTypeServiceWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          SvgPicture.asset(AppImages.scanDiagnosis),
-          Text(
-            "medical analysis",
-            style: TextStyle(
-              fontSize: 12.sp,
-              fontWeight: FontWeight.bold,
-              color: AppColors.darkBlue,
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                type,
+                style: TextStyle(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.darkBlue,
+                ),
+              ),
+              Text(
+                " medical analysis",
+                style: TextStyle(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.darkBlue,
+                ),
+              ),
+            ],
           ),
           SizedBox(
             width: 128.w,
-            height: 30.h,
+            height: 35.h,
             child: Text(
               AppStrings.showDetailed,
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 7.sp,
+                fontSize: 9.sp,
                 color: AppColors.darkBlue,
               ),
             ),
           ),
-          Text(
-            "upload medical test",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 10.sp,
-              color: AppColors.primary,
-              decoration: TextDecoration.underline,
-              decorationColor: AppColors.primary,
+          //SizedBox(height: 5.h),
+          InkWell(
+            onTap: () {
+              if(type == 'Liver') {
+                CustomNavigator.push(Routes.LIVER);
+              }
+              else if(type == 'Diabetes') {
+                CustomNavigator.push(Routes.DIABETES);
+              }else {
+                CustomNavigator.push(Routes.ANEMIA);
+              }
+              //CustomNavigator.push(Routes.MEDICAL);
+            },
+            child: Text(
+              "upload medical test",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 12.sp,
+                color: AppColors.primary,
+                decoration: TextDecoration.underline,
+                decorationColor: AppColors.primary,
+              ),
             ),
           ),
         ],

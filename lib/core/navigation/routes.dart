@@ -4,6 +4,14 @@ class Routes {
   static const String HOME = "HOME";
   static const String PROFILE = "PROFILE";
   static const String MEDICAL = "MEDICAL";
+
+  static const String LIVER = "LIVER";
+  static const String LIVERRESULT = "LIVERRESULT";
+  static const String DIABETES = "DIABETES";
+  static const String DIABETESRESULT = "DIABETESRESULT";
+  static const String ANEMIA = "ANEMIA";
+  static const String ANEMIARESULT = "ANEMIARESULT";
+
   static const String RESULT = "RESULT";
   static const String LOGIN = "LOGIN";
   static const String SIGNUP = "SIGNUP";

@@ -13,4 +13,6 @@ class GetUserDataLoading extends HomeState {}
 class GetUserDataSuccess extends HomeState {}
 class GetUserDataError extends HomeState {}
 
+class LogoutSuccessState extends HomeState{}
+
 class HomeError extends HomeState {}

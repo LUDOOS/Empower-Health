@@ -1,3 +1,5 @@
+import 'package:empower_health/core/caching/caching_helper.dart';
+import 'package:empower_health/core/caching/caching_key.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -23,7 +25,7 @@ class UserAvatarWidget extends StatelessWidget {
           ),
           SizedBox(height: 8.h),
           Text(
-            "Username",
+            CachingHelper.instance!.readString(CachingKey.NAME),
             style: TextStyle(
               fontSize: 14.sp,
               color: AppColors.primary,
