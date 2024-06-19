@@ -163,7 +163,8 @@ class MedicalCubit extends Cubit<MedicalState> {
       });
     } catch (e) {
       emit(FindNearestDocError());
-    };
+    }
+    ;
   }
 
   void addAlarm({
@@ -191,14 +192,16 @@ class MedicalCubit extends Cubit<MedicalState> {
         },
       ).then((value) {
         emit(AddAlarmSuccess());
-      }).then((value){
+
         ///notification
-        int intervalHour = (24/frequency) as int;
+        int intervalHour = (24 / frequency) as int;
+        // freq=1 => inter=24, freq=2 => inter=12,
+        // freq=3 => inter=8, freq=4 => inter=6,
         print('intervalHour = $intervalHour');
         NotificationService().scheduleNotification(
-            'Time to take $drugName',
-            'The dose is: $dosage',
-            firstDosage,
+          'Time to take $drugName',
+          'The dose is: $dosage',
+          firstDosage,
           intervalHour,
           startDate,
           endDate,
@@ -212,18 +215,23 @@ class MedicalCubit extends Cubit<MedicalState> {
   Alarm? alarms;
   Future getAlarms() async {
     emit(GetAlarmsLoading());
-      await NetworkHelper.instance.get(endPoint: EndPoints.GETALARMS).then((value){
-        alarms = Alarm.fromJson(value.data);
-        print('*************');
-        print(alarms!.data.length);
-        return alarms;});
+    await NetworkHelper.instance
+        .get(endPoint: EndPoints.GETALARMS)
+        .then((value) {
+      alarms = Alarm.fromJson(value.data);
+      print('*************');
+      print(alarms!.data.length);
+      return alarms;
+    });
     return alarms;
   }
-  void deleteAlarm(int id) async{
-    await NetworkHelper.instance.delete(endPoint: 'drugs/delete/${id}').then((value){
-         getAlarms();
-         emit(AlarmDeletedSuccessfully());
-    }
-    );
+
+  void deleteAlarm(int id) async {
+    await NetworkHelper.instance
+        .delete(endPoint: 'drugs/delete/${id}')
+        .then((value) {
+      getAlarms();
+      emit(AlarmDeletedSuccessfully());
+    });
   }
 }
