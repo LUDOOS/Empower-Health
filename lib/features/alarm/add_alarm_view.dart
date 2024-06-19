@@ -9,6 +9,7 @@ import '../../../core/common/custom_app_bar.dart';
 import '../../../core/common/cutsom_text_field.dart';
 import '../../../core/common/primary_button.dart';
 import '../../../core/utils/app_styles.dart';
+import '../../core/notification/database_helper.dart';
 import '../../core/utils/app_colors.dart';
 
 class AddAlarmView extends StatefulWidget {
@@ -19,6 +20,42 @@ class AddAlarmView extends StatefulWidget {
 }
 
 class _AddAlarmViewState extends State<AddAlarmView> {
+
+  final DatabaseHelper _dbHelper = DatabaseHelper();
+  final NotificationService _notificationService = NotificationService();
+
+  @override
+  void initState() {
+    super.initState();
+    _notificationService.init();
+    _loadAlarms();
+  }
+
+  Future<void> _loadAlarms() async {
+    var alarms = await _dbHelper.queryAllAlarms();
+    for (var alarm in alarms) {
+      _notificationService.periodicScheduleNotification(
+        'Time to take ${alarm['title']}',
+        'The dose is: ${alarm['dosage']}',
+        alarm['time'],
+      );
+    }
+  }
+
+  void _setAlarm(String title,String body, DateTime time) async {
+    final now = DateTime.now();
+    final alarmTime = time;
+    final alarm = {
+      'title': title,
+      'body' : body,
+      'time': alarmTime.toIso8601String(),
+    };
+    int id = await _dbHelper.insertAlarm(alarm);
+    _notificationService.periodicScheduleNotification(title, body, time);
+    setState(() {});
+  }
+
+
   TextEditingController drugNameController = TextEditingController();
   TextEditingController frequencyController = TextEditingController();
   TextEditingController dosageController = TextEditingController();
@@ -37,6 +74,7 @@ class _AddAlarmViewState extends State<AddAlarmView> {
             SnackBar(content: Text('Alarm created successfully')),
           );
         }
+        //if(DateTime.now() == )
       },
       builder: (context, state) {
         return Scaffold(

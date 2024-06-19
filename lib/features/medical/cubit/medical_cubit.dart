@@ -2,8 +2,10 @@ import 'dart:async';
 import 'package:empower_health/core/caching/caching_helper.dart';
 import 'package:empower_health/core/caching/caching_key.dart';
 import 'package:empower_health/core/network/network.dart';
+import 'package:empower_health/features/model/alarm.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:location/location.dart';
 
 import '../../../core/notification/notification_service.dart';
@@ -161,8 +163,7 @@ class MedicalCubit extends Cubit<MedicalState> {
       });
     } catch (e) {
       emit(FindNearestDocError());
-    }
-    ;
+    };
   }
 
   void addAlarm({
@@ -175,15 +176,16 @@ class MedicalCubit extends Cubit<MedicalState> {
   }) async {
     emit(AddAlarmLoading());
     try {
+      String firstDose = DateFormat("HH:mm").format(firstDosage);
       await NetworkHelper.instance.post(
         endPoint: EndPoints.ADDALARM,
         data: {
-          "dosage": dosage,
+          "dosage": dosage.toString(),
           "drug_name": drugName,
           "frequency": frequency,
           "start_date": startDate.toString(),
           "end_date": endDate.toString(),
-          "first_dosage": firstDosage.toString(),
+          "first_dosage": firstDose.toString(),
           "status": "active",
           "patient_id": CachingHelper.instance?.readInteger(CachingKey.USER),
         },
@@ -194,7 +196,6 @@ class MedicalCubit extends Cubit<MedicalState> {
         int intervalHour = (24/frequency) as int;
         print('intervalHour = $intervalHour');
         NotificationService().scheduleNotification(
-            0,
             'Time to take $drugName',
             'The dose is: $dosage',
             firstDosage,
@@ -208,7 +209,21 @@ class MedicalCubit extends Cubit<MedicalState> {
     }
   }
 
-
-
-  void getAlarms() async {}
+  Alarm? alarms;
+  Future getAlarms() async {
+    emit(GetAlarmsLoading());
+      await NetworkHelper.instance.get(endPoint: EndPoints.GETALARMS).then((value){
+        alarms = Alarm.fromJson(value.data);
+        print('*************');
+        print(alarms!.data.length);
+        return alarms;});
+    return alarms;
+  }
+  void deleteAlarm(int id) async{
+    await NetworkHelper.instance.delete(endPoint: 'drugs/delete/${id}').then((value){
+         getAlarms();
+         emit(AlarmDeletedSuccessfully());
+    }
+    );
+  }
 }

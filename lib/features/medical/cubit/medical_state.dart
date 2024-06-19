@@ -33,6 +33,12 @@ class AddAlarmLoading extends MedicalState {}
 class AddAlarmSuccess extends MedicalState {}
 class AddAlarmError extends MedicalState {}
 
+class GetAlarmsLoading extends MedicalState {}
+class GetAlarmsSuccess extends MedicalState {}
+class GetAlarmsError extends MedicalState {}
+
+class AlarmDeletedSuccessfully extends MedicalState {}
+
 class LocationSentState extends MedicalState {}
 
 class Error extends MedicalState {}

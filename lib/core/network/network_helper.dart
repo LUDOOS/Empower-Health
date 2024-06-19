@@ -50,6 +50,24 @@ class NetworkHelper {
     return response;
   }
 
+Future<Response> delete({
+    required String endPoint,
+    dynamic data,
+    Map<String, dynamic>? params,
+    bool withToken = true,
+  }) async {
+    var response = await _dio.delete(endPoint,
+        data: data,
+        queryParameters: params,
+        options: await _configureOptions(withToken));
+    return response;
+  }
+
+
+
+
+
+
   Future<Options> _configureOptions(bool withToken) async {
     Options options = Options();
     if (withToken) {

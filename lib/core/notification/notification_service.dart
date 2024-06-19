@@ -23,7 +23,7 @@ class NotificationService {
   }
 
   Future<void> scheduleNotification(
-      int id, String title, String body, DateTime scheduledTime,//5:30
+      String title, String body, DateTime scheduledTime,//5:30
       int intervalHours, DateTime start, DateTime end) async {//30min
     //final now = DateTime.now();
     final nextTriggerTime = scheduledTime.add(Duration(hours: intervalHours));
@@ -41,7 +41,7 @@ class NotificationService {
     final platformChannelSpecifics = NotificationDetails(android: androidPlatformChannelSpecifics);
 
     await _flutterLocalNotificationsPlugin.zonedSchedule(
-      id,
+      0,
       title,
       body,
       tz.TZDateTime.from(scheduledTime, tz.local),//5:30
@@ -50,10 +50,9 @@ class NotificationService {
       uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
       matchDateTimeComponents: DateTimeComponents.time,
     );
-    while(start.isBefore(DateTime.now()) && end.isAfter(DateTime.now())) {
+    while( end.isAfter(DateTime.now())) {
       Timer(Duration(hours: intervalHours), () =>
           scheduleNotification(
-              id,
               title,
               body,
               nextTriggerTime,
@@ -62,7 +61,7 @@ class NotificationService {
               end));
     }
   }
-  Future<void> periodicScheduleNotification(int id, String title, String body, DateTime scheduledTime) async {
+  Future<void> periodicScheduleNotification(String title, String body, DateTime scheduledTime) async {
     const AndroidNotificationDetails androidNotificationDetails =
     AndroidNotificationDetails(
         'repeating channel id', 'repeating channel name',
@@ -70,8 +69,8 @@ class NotificationService {
     const NotificationDetails notificationDetails =
     NotificationDetails(android: androidNotificationDetails);
     await _flutterLocalNotificationsPlugin.periodicallyShow(0, title,
-        body, RepeatInterval.everyMinute, notificationDetails,
-        //androidAllowWhileIdle: true
+        body, RepeatInterval.values[5], notificationDetails,
+        androidAllowWhileIdle: true
     );
   }
 }
