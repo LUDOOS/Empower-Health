@@ -27,8 +27,9 @@ class _AddAlarmViewState extends State<AddAlarmView> {
   @override
   void initState() {
     super.initState();
-    ///_dbHelper.dropDatabase();
+    //_dbHelper.dropDatabase();
     _notificationService.init();
+    context.read<MedicalCubit>().loadAlarms();
   }
 
 
@@ -51,6 +52,7 @@ class _AddAlarmViewState extends State<AddAlarmView> {
             SnackBar(content: Text('Alarm created successfully')),
           );
         }
+        else if(state is SendNotificationSuccess){context.read<MedicalCubit>().loadAlarms();}
         //if(DateTime.now() == )
       },
       builder: (context, state) {

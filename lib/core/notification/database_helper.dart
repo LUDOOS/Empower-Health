@@ -30,11 +30,11 @@ class DatabaseHelper {
       CREATE TABLE alarms(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT,
-        freq int
-        dosage int
-        time DateTime
-        StartDate DateTime
-        EndDate DateTime
+        freq int,
+        dose int,
+        time Text,
+        StartDate Text,
+        EndDate Text
       )
     ''');
   }

@@ -37,6 +37,8 @@ class GetAlarmsLoading extends MedicalState {}
 class GetAlarmsSuccess extends MedicalState {}
 class GetAlarmsError extends MedicalState {}
 
+class SendNotificationSuccess extends MedicalState {}
+
 class AlarmDeletedSuccessfully extends MedicalState {}
 
 class LocationSentState extends MedicalState {}

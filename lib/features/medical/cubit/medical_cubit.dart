@@ -230,8 +230,10 @@ class MedicalCubit extends Cubit<MedicalState> {
   Future<void> loadAlarms() async {
     var alarms = await _dbHelper.queryAllAlarms();
     for (var alarm in alarms) {
-      sendNotification(dosage: alarm['dosage'], frequency: alarm['freq'], drugName: alarm['name'],
-          startDate: alarm['StartDate'], endDate: alarm['EndDate'], firstDosage: alarm['time']);
+      ///Last Error in this Part
+      // sendNotification(dosage: alarm['dose'], frequency: alarm['freq'], drugName: alarm['name'],
+      //     startDate: DateTime.parse(alarm['StartDate']), endDate: DateTime.parse(alarm['EndDate']), firstDosage: DateTime.parse(alarm['time']));
+      //
     }
     print(alarms);
   }
@@ -247,15 +249,24 @@ class MedicalCubit extends Cubit<MedicalState> {
   })async {
   NotificationService().scheduleNotification('Time to take $drugName', 'The dose is: $dosage', firstDosage, startDate, endDate,
   ).then((val){
-    int intervalHour = 24;
-    if(frequency == 2)intervalHour = 12;
-    else if(frequency == 3)intervalHour = 8;
-    else if(frequency == 4)intervalHour = 6;
-    print('intervalHour = $intervalHour');
-    DateTime alarmTime = firstDosage.add(Duration(hours: intervalHour));
-    print(alarmTime);
-    setAlarm(dosage: dosage, frequency: frequency, drugName: drugName, startDate: startDate, endDate: endDate, alarmTime: alarmTime);
-  });
+      emit(SendNotificationSuccess());
+      int intervalHour = 24;
+      if (frequency == 2)
+        intervalHour = 12;
+      else if (frequency == 3)
+        intervalHour = 8;
+      else if (frequency == 4) intervalHour = 6;
+      print('intervalHour = $intervalHour');
+      DateTime alarmTime = firstDosage.add(Duration(hours: intervalHour));
+      ///FOR TESTING FREQUENCY ===> DateTime alarmTime = firstDosage.add(Duration(minutes: 1));
+      print(alarmTime);
+      setAlarm(dosage: dosage,
+          frequency: frequency,
+          drugName: drugName,
+          startDate: startDate,
+          endDate: endDate,
+          alarmTime: alarmTime);
+    });
 }
 
   void setAlarm({
@@ -270,11 +281,12 @@ class MedicalCubit extends Cubit<MedicalState> {
     final alarm = {
       'name': drugName,
       'freq' : frequency,
-      'dosage': dosage,
-      'time': alarmTime,
-      'StartDate': startDate,
-      'EndDate': endDate,
+      'dose': dosage,
+      'time': alarmTime.toString(),
+      'StartDate': startDate.toString(),
+      'EndDate': endDate.toString(),
     };
-    int id = await _dbHelper.insertAlarm(alarm);
+     int id =
+    await _dbHelper.insertAlarm(alarm);
   }
 }
