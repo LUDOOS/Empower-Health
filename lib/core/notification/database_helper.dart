@@ -29,8 +29,12 @@ class DatabaseHelper {
     await db.execute('''
       CREATE TABLE alarms(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        title TEXT,
-        time TEXT
+        name TEXT,
+        freq int
+        dosage int
+        time DateTime
+        StartDate DateTime
+        EndDate DateTime
       )
     ''');
   }
@@ -54,5 +58,13 @@ class DatabaseHelper {
   Future<int> deleteAlarm(int id) async {
     Database db = await database;
     return await db.delete('alarms', where: 'id = ?', whereArgs: [id]);
+  }
+
+  Future<void> dropDatabase() async {
+    String path = join(await getDatabasesPath(), 'app_database.db');
+    if (await databaseExists(path)) {
+      await deleteDatabase(path);
+      _database = null;
+    }
   }
 }

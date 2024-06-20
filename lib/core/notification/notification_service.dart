@@ -23,11 +23,8 @@ class NotificationService {
   }
 
   Future<void> scheduleNotification(
-      String title, String body, DateTime scheduledTime,//5:30
-      int intervalHours, DateTime start, DateTime end) async {//30min
-    //final now = DateTime.now();
-    final nextTriggerTime = scheduledTime.add(Duration(hours: intervalHours));
-//6:00
+      String title, String body, DateTime scheduledTime,
+       DateTime start, DateTime end) async {
     const androidPlatformChannelSpecifics = AndroidNotificationDetails(
       'medication_channel_id',
       'Medication Reminders',
@@ -39,28 +36,21 @@ class NotificationService {
     );
 
     final platformChannelSpecifics = NotificationDetails(android: androidPlatformChannelSpecifics);
-
-    await _flutterLocalNotificationsPlugin.zonedSchedule(
-      0,
-      title,
-      body,
-      tz.TZDateTime.from(scheduledTime, tz.local),//5:30
-      platformChannelSpecifics,
-      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-      uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
-      matchDateTimeComponents: DateTimeComponents.time,
-    );
-    while( end.isAfter(DateTime.now())) {
-      Timer(Duration(hours: intervalHours), () =>
-          scheduleNotification(
-              title,
-              body,
-              nextTriggerTime,
-              intervalHours,
-              start,
-              end));
+    if(start.isBefore(DateTime.now()) && end.isAfter(DateTime.now()) && !scheduledTime.isBefore(DateTime.now())){
+      await _flutterLocalNotificationsPlugin.zonedSchedule(
+        0,
+        title,
+        body,
+        tz.TZDateTime.from(scheduledTime, tz.local),//5:30
+        platformChannelSpecifics,
+        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+        uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
+        matchDateTimeComponents: DateTimeComponents.time,
+      );
     }
   }
+
+
   Future<void> periodicScheduleNotification(String title, String body, DateTime scheduledTime) async {
     const AndroidNotificationDetails androidNotificationDetails =
     AndroidNotificationDetails(
@@ -69,7 +59,7 @@ class NotificationService {
     const NotificationDetails notificationDetails =
     NotificationDetails(android: androidNotificationDetails);
     await _flutterLocalNotificationsPlugin.periodicallyShow(0, title,
-        body, RepeatInterval.values[5], notificationDetails,
+        body, RepeatInterval.everyMinute, notificationDetails,
         androidAllowWhileIdle: true
     );
   }

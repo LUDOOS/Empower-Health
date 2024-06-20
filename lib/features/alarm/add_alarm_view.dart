@@ -1,10 +1,10 @@
+import 'dart:core';
 import 'package:empower_health/core/navigation/custom_navigator.dart';
 import 'package:empower_health/core/notification/notification_service.dart';
 import 'package:empower_health/features/medical/cubit/medical_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../core/common/custom_app_bar.dart';
 import '../../../core/common/cutsom_text_field.dart';
 import '../../../core/common/primary_button.dart';
@@ -27,32 +27,8 @@ class _AddAlarmViewState extends State<AddAlarmView> {
   @override
   void initState() {
     super.initState();
+    ///_dbHelper.dropDatabase();
     _notificationService.init();
-    _loadAlarms();
-  }
-
-  Future<void> _loadAlarms() async {
-    var alarms = await _dbHelper.queryAllAlarms();
-    for (var alarm in alarms) {
-      _notificationService.periodicScheduleNotification(
-        'Time to take ${alarm['title']}',
-        'The dose is: ${alarm['dosage']}',
-        alarm['time'],
-      );
-    }
-  }
-
-  void _setAlarm(String title,String body, DateTime time) async {
-    final now = DateTime.now();
-    final alarmTime = time;
-    final alarm = {
-      'title': title,
-      'body' : body,
-      'time': alarmTime.toIso8601String(),
-    };
-    int id = await _dbHelper.insertAlarm(alarm);
-    _notificationService.periodicScheduleNotification(title, body, time);
-    setState(() {});
   }
 
 
@@ -70,6 +46,7 @@ class _AddAlarmViewState extends State<AddAlarmView> {
       listener: (context, state) {
         if (state is AddAlarmSuccess) {
           CustomNavigator.pop();
+          //_setAlarm('title', 'body', _selectedTime);
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Alarm created successfully')),
           );

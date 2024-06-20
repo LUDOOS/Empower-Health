@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
               create: (context) => HomeCubit(),
             ),
             BlocProvider(
-              create: (context) => MedicalCubit(),
+              create: (context) => MedicalCubit()..loadAlarms(),
             ),
             BlocProvider(
               create: (context) => ProfileCubit(),

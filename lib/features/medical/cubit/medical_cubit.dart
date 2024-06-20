@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:core';
 import 'package:empower_health/core/caching/caching_helper.dart';
 import 'package:empower_health/core/caching/caching_key.dart';
 import 'package:empower_health/core/network/network.dart';
@@ -8,11 +9,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:location/location.dart';
 
+import '../../../core/notification/database_helper.dart';
 import '../../../core/notification/notification_service.dart';
 part 'medical_state.dart';
 
 class MedicalCubit extends Cubit<MedicalState> {
   MedicalCubit() : super(MedicalInitial());
+
+  final DatabaseHelper _dbHelper = DatabaseHelper();
+  final NotificationService _notificationService = NotificationService();
 
   String? specialization;
   String? liverResult;
@@ -164,7 +169,27 @@ class MedicalCubit extends Cubit<MedicalState> {
     } catch (e) {
       emit(FindNearestDocError());
     }
-    ;
+  }
+  Alarm? alarms;
+  Future getAlarms() async {
+    emit(GetAlarmsLoading());
+    await NetworkHelper.instance
+        .get(endPoint: EndPoints.GETALARMS)
+        .then((value) {
+      alarms = Alarm.fromJson(value.data);
+      print('*************');
+      print(alarms!.data.length);
+      return alarms;
+    });
+    return alarms;
+  }
+  void deleteAlarm(int id) async {
+    await NetworkHelper.instance
+        .delete(endPoint: 'drugs/delete/${id}')
+        .then((value) {
+      getAlarms();
+      emit(AlarmDeletedSuccessfully());
+    });
   }
 
   void addAlarm({
@@ -190,48 +215,66 @@ class MedicalCubit extends Cubit<MedicalState> {
           "status": "active",
           "patient_id": CachingHelper.instance?.readInteger(CachingKey.USER),
         },
-      ).then((value) {
+      ).then((value)async {
         emit(AddAlarmSuccess());
-
         ///notification
-        int intervalHour = (24 / frequency) as int;
-        // freq=1 => inter=24, freq=2 => inter=12,
-        // freq=3 => inter=8, freq=4 => inter=6,
-        print('intervalHour = $intervalHour');
-        NotificationService().scheduleNotification(
-          'Time to take $drugName',
-          'The dose is: $dosage',
-          firstDosage,
-          intervalHour,
-          startDate,
-          endDate,
-        );
+        sendNotification(dosage: dosage, frequency: frequency, drugName: drugName, startDate: startDate, endDate: endDate, firstDosage: firstDosage);
       });
     } catch (e) {
       emit(AddAlarmError());
     }
   }
 
-  Alarm? alarms;
-  Future getAlarms() async {
-    emit(GetAlarmsLoading());
-    await NetworkHelper.instance
-        .get(endPoint: EndPoints.GETALARMS)
-        .then((value) {
-      alarms = Alarm.fromJson(value.data);
-      print('*************');
-      print(alarms!.data.length);
-      return alarms;
-    });
-    return alarms;
+
+
+  Future<void> loadAlarms() async {
+    var alarms = await _dbHelper.queryAllAlarms();
+    for (var alarm in alarms) {
+      sendNotification(dosage: alarm['dosage'], frequency: alarm['freq'], drugName: alarm['name'],
+          startDate: alarm['StartDate'], endDate: alarm['EndDate'], firstDosage: alarm['time']);
+    }
+    print(alarms);
   }
 
-  void deleteAlarm(int id) async {
-    await NetworkHelper.instance
-        .delete(endPoint: 'drugs/delete/${id}')
-        .then((value) {
-      getAlarms();
-      emit(AlarmDeletedSuccessfully());
-    });
+
+  Future sendNotification({
+    required int dosage,
+    required int frequency,
+    required String drugName,
+    required DateTime startDate,
+    required DateTime endDate,
+    required DateTime firstDosage,
+  })async {
+  NotificationService().scheduleNotification('Time to take $drugName', 'The dose is: $dosage', firstDosage, startDate, endDate,
+  ).then((val){
+    int intervalHour = 24;
+    if(frequency == 2)intervalHour = 12;
+    else if(frequency == 3)intervalHour = 8;
+    else if(frequency == 4)intervalHour = 6;
+    print('intervalHour = $intervalHour');
+    DateTime alarmTime = firstDosage.add(Duration(hours: intervalHour));
+    print(alarmTime);
+    setAlarm(dosage: dosage, frequency: frequency, drugName: drugName, startDate: startDate, endDate: endDate, alarmTime: alarmTime);
+  });
+}
+
+  void setAlarm({
+    required int dosage,
+    required int frequency,
+    required String drugName,
+    required DateTime startDate,
+    required DateTime endDate,
+    required DateTime alarmTime,
+  }) async {
+    ///Database
+    final alarm = {
+      'name': drugName,
+      'freq' : frequency,
+      'dosage': dosage,
+      'time': alarmTime,
+      'StartDate': startDate,
+      'EndDate': endDate,
+    };
+    int id = await _dbHelper.insertAlarm(alarm);
   }
 }
