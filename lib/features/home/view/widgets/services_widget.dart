@@ -13,7 +13,7 @@ class ServicesWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 250.h,
+      height: 300.h,
       child: Row(
         children: [
           Expanded(
@@ -86,17 +86,45 @@ class ServiceCard extends StatelessWidget {
             ],
           ),
           SizedBox(height: 5.h),
-          SizedBox(
-            width: 128.w,
-            height: 31.h,
-            child: Text(
-              AppStrings.showDetailed,
-              style: TextStyle(
-                fontSize: 7.sp,
-                color: AppColors.darkBlue,
+          if(type == 'Liver')...[Expanded(
+            child: SizedBox(
+              width: 340.w,
+              height: 31.h,
+              child: Text(
+                AppStrings.showDetailedForLiver,
+                style: TextStyle(
+                  fontSize: 7.sp,
+                  color: AppColors.darkBlue,
+                ),
               ),
             ),
-          ),
+          )],
+          if(type == 'Diabetes')...[Expanded(
+            child: SizedBox(
+              width: 128.w,
+              height: 31.h,
+              child: Text(
+                AppStrings.showDetailedForDiabetes,
+                style: TextStyle(
+                  fontSize: 7.sp,
+                  color: AppColors.darkBlue,
+                ),
+              ),
+            ),
+          )],
+          if(type == 'Anemia')...[Expanded(
+            child: SizedBox(
+              width: 350.w,
+              height: 31.h,
+              child: Text(
+                AppStrings.showDetailedForAnemia,
+                style: TextStyle(
+                  fontSize: 7.sp,
+                  color: AppColors.darkBlue,
+                ),
+              ),
+            ),
+          )],
           SizedBox(height: 5.h),
           InkWell(
             onTap: () {

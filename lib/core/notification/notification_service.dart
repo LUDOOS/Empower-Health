@@ -22,17 +22,19 @@ class NotificationService {
     return tz.TZDateTime.from(dateTime, tz.local);
   }
 
-  Future<void> scheduleNotification(
+  Future<void> scheduleNotification(int id,
       String title, String body, DateTime scheduledTime,
        DateTime start, DateTime end) async {
-    const androidPlatformChannelSpecifics = AndroidNotificationDetails(
-      'medication_channel_id',
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+      'medication_channel_$id',
       'Medication Reminders',
       channelDescription: 'Channel for medication reminders',
       importance: Importance.max,
       priority: Priority.high,
       showWhen: false,
-      ticker: 'ticker'
+      ticker: 'ticker',
+      playSound: true,
+      //sound: RawResourceAndroidNotificationSound('assets/sound.mp3'),
     );
 
     final platformChannelSpecifics = NotificationDetails(android: androidPlatformChannelSpecifics);
@@ -49,6 +51,7 @@ class NotificationService {
       );
     }
   }
+
 
 
   Future<void> periodicScheduleNotification(String title, String body, DateTime scheduledTime) async {

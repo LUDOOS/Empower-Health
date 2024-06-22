@@ -39,7 +39,9 @@ class AuthCubit extends Cubit<AuthState> {
           data: {
             "email": mail, "password": password,
             "name": name, "birthdate": birthdate, "gender": gender
-          });
+          }).then((val){
+            CachingHelper.instance!.writeData('id', 0);
+      });
       emit(AuthRegisterSuccess(result.data['token']));
       getToken(result);
     } catch (e) {

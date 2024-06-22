@@ -61,7 +61,7 @@ class MedicalTypeServiceWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 140.h,
+      height: 150.h,
       width: 180.w,
       padding: EdgeInsets.symmetric(vertical: 10.h),
       decoration: AppStyles.container(color: color),
@@ -89,19 +89,46 @@ class MedicalTypeServiceWidget extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(
-            width: 128.w,
-            height: 35.h,
-            child: Text(
-              AppStrings.showDetailed,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 9.sp,
-                color: AppColors.darkBlue,
+          if(type == 'Liver')...[SizedBox(
+            //width: 200.w,
+            //height: 70.h,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                AppStrings.showDetailedForLiver,
+                style: TextStyle(
+                  fontSize: 7.sp,
+                  color: AppColors.darkBlue,
+                ),
               ),
             ),
-          ),
-          //SizedBox(height: 5.h),
+          )],
+          if(type == 'Diabetes')...[SizedBox(
+            // width: 128.w,
+            // height: 31.h,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                AppStrings.showDetailedForDiabetes,
+                style: TextStyle(
+                  fontSize: 7.sp,
+                  color: AppColors.darkBlue,
+                ),
+              ),
+            ),
+          )],
+          if(type == 'Anemia')...[SizedBox(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                AppStrings.showDetailedForAnemia,
+                style: TextStyle(
+                  fontSize: 7.sp,
+                  color: AppColors.darkBlue,
+                ),
+              ),
+            ),
+          )],
           InkWell(
             onTap: () {
               if(type == 'Liver') {

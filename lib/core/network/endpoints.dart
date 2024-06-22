@@ -1,6 +1,6 @@
 part of 'network.dart';
 
-String BASE_URL = "https://bab9-41-43-237-138.ngrok-free.app/api/";
+String BASE_URL = "https://1609-156-219-241-146.ngrok-free.app/api/";
 class EndPoints {
   static const LOGIN = "login";
   static const LOGOUT = "logout/patient";

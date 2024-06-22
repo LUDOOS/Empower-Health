@@ -36,7 +36,6 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCuTilAfnGfkZtIx0T3qf-eOmWZ_N2LpoY"/>
 
-        <receiver android:exported="false" android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver" />
         <receiver android:exported="false" android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
