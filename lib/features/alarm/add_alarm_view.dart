@@ -27,9 +27,9 @@ class _AddAlarmViewState extends State<AddAlarmView> {
   @override
   void initState() {
     super.initState();
-    //_dbHelper.dropDatabase();
+    _dbHelper.dropDatabase();
     _notificationService.init();
-    context.read<MedicalCubit>().loadAlarms();
+    //context.read<MedicalCubit>().loadAlarms();
   }
 
 

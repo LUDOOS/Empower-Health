@@ -10,39 +10,33 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:workmanager/workmanager.dart';
 import 'core/navigation/custom_navigator.dart';
 import 'core/navigation/routes.dart';
 import 'core/notification/notification_service.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tzdata;
-@pragma('vm:entry-point') // Mandatory if the App is obfuscated or using Flutter 3.1+
-void callbackDispatcher() {
-  Workmanager().executeTask((task, inputData) async {
-    int? totalExecutions;
-    final _sharedPreference = await SharedPreferences.getInstance(); //Initialize dependency
-
-    try { //add code execution
-      totalExecutions = _sharedPreference.getInt("totalExecutions");
-      _sharedPreference.setInt("totalExecutions", totalExecutions == null ? 1 : totalExecutions+1);
-    } catch(err) {
-      print(err.toString());
-      //Logger().e(err.toString()); // Logger flutter package, prints error on the debug console
-      throw Exception(err);
-    }
-    print("Native called background task: $task"); //simpleTask will be emitted here.
-    return Future.value(true);
-  });
-}
+//@pragma('vm:entry-point') // Mandatory if the App is obfuscated or using Flutter 3.1+
+//void callbackDispatcher() {
+//   Workmanager().executeTask((task, inputData) async {
+//     int? totalExecutions;
+//     final _sharedPreference = await SharedPreferences.getInstance(); //Initialize dependency
+//
+//     try { //add code execution
+//       totalExecutions = _sharedPreference.getInt("totalExecutions");
+//       _sharedPreference.setInt("totalExecutions", totalExecutions == null ? 1 : totalExecutions+1);
+//     } catch(err) {
+//       print(err.toString());
+//       //Logger().e(err.toString()); // Logger flutter package, prints error on the debug console
+//       throw Exception(err);
+//     }
+//     print("Native called background task: $task"); //simpleTask will be emitted here.
+//     return Future.value(true);
+//   });
+// }
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final NotificationService notificationService = NotificationService();
   notificationService.init();
-  Workmanager().initialize(
-      callbackDispatcher, // The top level function, aka callbackDispatcher
-      isInDebugMode: true // If enabled it will post a notification whenever the task is running. Handy for debugging tasks
-  );
-  // Workmanager().registerOneOffTask("task-identifier", "simpleTask", inputData: {'help':"helpee"},);
   await CachingHelper.init();
   try {
     tzdata.initializeTimeZones();
@@ -78,7 +72,7 @@ class MyApp extends StatelessWidget {
               create: (context) => HomeCubit(),
             ),
             BlocProvider(
-              create: (context) => MedicalCubit()..loadAlarms(),
+              create: (context) => MedicalCubit(),
             ),
             BlocProvider(
               create: (context) => ProfileCubit(),

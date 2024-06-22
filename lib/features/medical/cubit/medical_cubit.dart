@@ -8,8 +8,6 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:location/location.dart';
-import 'package:workmanager/workmanager.dart';
-
 import '../../../core/notification/database_helper.dart';
 import '../../../core/notification/notification_service.dart';
 part 'medical_state.dart';
@@ -219,7 +217,8 @@ class MedicalCubit extends Cubit<MedicalState> {
       ).then((value)async {
         emit(AddAlarmSuccess());
         ///notification
-        sendNotification(id: frequency,dosage: dosage, frequency: frequency, drugName: drugName, startDate: startDate, endDate: endDate, firstDosage: firstDosage);
+        NotificationService().scheduleNotification('Time to take $drugName', 'The dose is: $dosage', firstDosage, startDate, endDate,);
+        //sendNotification(dosage: dosage, frequency: frequency, drugName: drugName, startDate: startDate, endDate: endDate, firstDosage: firstDosage);
       });
     } catch (e) {
       emit(AddAlarmError());
@@ -260,7 +259,6 @@ class MedicalCubit extends Cubit<MedicalState> {
   // }
 
   Future sendNotification({
-    required int id,
     required int dosage,
     required int frequency,
     required String drugName,
@@ -268,27 +266,28 @@ class MedicalCubit extends Cubit<MedicalState> {
     required DateTime endDate,
     required DateTime firstDosage,
   })async {
-  NotificationService().scheduleNotification(id,'Time to take $drugName', 'The dose is: $dosage', firstDosage, startDate, endDate,
-  ).then((val){
-      emit(SendNotificationSuccess());
-      int intervalHour = 24;
-      if (frequency == 2)
-        intervalHour = 12;
-      else if (frequency == 3)
-        intervalHour = 8;
-      else if (frequency == 4) intervalHour = 6;
-      //print('intervalHour = $intervalHour');
-      DateTime alarmTime = firstDosage.add(Duration(hours: intervalHour));
-      ///FOR TESTING FREQUENCY ===>
-      ///DateTime alarmTime = firstDosage.add(Duration(minutes: 1));
-      //print(alarmTime);
-      setAlarm(dosage: dosage,
-          frequency: frequency,
-          drugName: drugName,
-          startDate: startDate,
-          endDate: endDate,
-          alarmTime: alarmTime);
-    });
+  NotificationService().scheduleNotification('Time to take $drugName', 'The dose is: $dosage', firstDosage, startDate, endDate,)
+    //   .then((val){
+    //   emit(SendNotificationSuccess());
+    //   int intervalHour = 24;
+    //   if (frequency == 2)
+    //     intervalHour = 12;
+    //   else if (frequency == 3)
+    //     intervalHour = 8;
+    //   else if (frequency == 4) intervalHour = 6;
+    //   //print('intervalHour = $intervalHour');
+    //   DateTime alarmTime = firstDosage.add(Duration(hours: intervalHour));
+    //   ///FOR TESTING FREQUENCY ===>
+    //   ///DateTime alarmTime = firstDosage.add(Duration(minutes: 1));
+    //   //print(alarmTime);
+    //   setAlarm(dosage: dosage,
+    //       frequency: frequency,
+    //       drugName: drugName,
+    //       startDate: startDate,
+    //       endDate: endDate,
+    //       alarmTime: alarmTime);
+    // })
+  ;
 }
 
   void setAlarm({
@@ -315,7 +314,7 @@ class MedicalCubit extends Cubit<MedicalState> {
     var alarms = await _dbHelper.queryAllAlarms();
     for (var alarm in alarms) {
       ///Last Error in this Part
-      sendNotification(id: alarm['id'],dosage: alarm['dose'], frequency: alarm['freq'], drugName: alarm['name'],
+      sendNotification(dosage: alarm['dose'], frequency: alarm['freq'], drugName: alarm['name'],
           startDate: DateTime.parse(alarm['StartDate']), endDate: DateTime.parse(alarm['EndDate']), firstDosage: DateTime.parse(alarm['time'])).then((value){
             //_dbHelper.deleteAlarm(alarm['id']);
       });

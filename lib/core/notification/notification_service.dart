@@ -22,18 +22,18 @@ class NotificationService {
     return tz.TZDateTime.from(dateTime, tz.local);
   }
 
-  Future<void> scheduleNotification(int id,
+  Future<void> scheduleNotification(
       String title, String body, DateTime scheduledTime,
        DateTime start, DateTime end) async {
     var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-      'medication_channel_$id',
+      'medication_channel_id',
       'Medication Reminders',
       channelDescription: 'Channel for medication reminders',
       importance: Importance.max,
       priority: Priority.high,
       showWhen: false,
       ticker: 'ticker',
-      playSound: true,
+      //playSound: true,
       //sound: RawResourceAndroidNotificationSound('assets/sound.mp3'),
     );
 
@@ -48,7 +48,7 @@ class NotificationService {
         androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
         uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
         matchDateTimeComponents: DateTimeComponents.time,
-      );
+      ).then((value){print("DONE");print(scheduledTime);});
     }
   }
 
