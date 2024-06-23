@@ -38,7 +38,9 @@ class NotificationService {
     );
 
     final platformChannelSpecifics = NotificationDetails(android: androidPlatformChannelSpecifics);
-    if(start.isBefore(DateTime.now()) && end.isAfter(DateTime.now()) && !scheduledTime.isBefore(DateTime.now())){
+    if(!start.isAfter(DateTime.now())
+        //&& !end.isBefore(DateTime.now())
+        && !scheduledTime.isBefore(DateTime.now())){
       await _flutterLocalNotificationsPlugin.zonedSchedule(
         0,
         title,
