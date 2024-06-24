@@ -55,7 +55,7 @@ class _SignupViewState extends State<SignupView> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Sign up to health sense",
+                          "Sign up to help me an hour",
                           style: AppStyles.bigText(),
                         ),
                         Text(

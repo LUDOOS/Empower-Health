@@ -53,7 +53,7 @@ class _LoginViewState extends State<LoginView> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Sign in to health sense",
+                          "Sign in to help me an hour",
                           style: AppStyles.bigText(),
                         ),
                         SizedBox(height: 40.h),
